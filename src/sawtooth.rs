@@ -25,12 +25,28 @@ impl Generate for Saw
         let num_samples = (self.sample_rate as f32 * duration) as usize;
         let nyquist_frequency = self.sample_rate as f32 / 2.0;
         let mut samples: Vec<f32> = vec![0.0;num_samples];
+        let attackTime: f32 = 0.05;
+        let decayTime: f32 = 0.05;
+        let decaySamples = (self.sample_rate as f32 * decayTime) as usize;
+        let attackSamples = (self.sample_rate as f32 * attackTime) as usize;
 
         samples.par_iter_mut().enumerate().for_each(|(i,sample)|
         {
             let mut s: f32 = 0.0;
             let t = i as f32 / self.sample_rate as f32;
             let mut h = 1;
+
+            //ATTACK
+            let envelope = if i < attackSamples {
+                i as f32 / attackSamples as f32 // Linear attack envelope
+            } else if i < num_samples - decaySamples {
+                1.0 // Sustain phase
+            }
+            else
+            {
+                (num_samples - i) as f32 / decaySamples as f32
+            };
+
             while h as f32 * frequency < nyquist_frequency
             {
                 let harmonic_frequency = h as f32 * frequency;
@@ -38,7 +54,7 @@ impl Generate for Saw
                 s = s + (harmonic_amplitude * (t * harmonic_frequency * 2.0 * PI).sin());
                 h+=1;
             }
-            *sample = s;
+            *sample = s * envelope;
         });
         return samples;
     }

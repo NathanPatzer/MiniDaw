@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
-use std::f32::consts::PI;
+use std::{f32::consts::PI, env};
 use rayon::prelude::{IntoParallelRefMutIterator, ParallelIterator, IndexedParallelIterator};
 
 use crate::waveforms::{Generate};
@@ -25,12 +25,29 @@ impl Generate for Triangle
         let num_samples = (self.sample_rate as f32 * duration) as usize;
         let nyquist_frequency = self.sample_rate as f32 / 2.0;
         let mut samples: Vec<f32> = vec![0.0;num_samples];
-
+        let attackTime: f32 = 0.01;
+        let decayTime: f32 = 0.01;
+        let decaySamples = (self.sample_rate as f32 * decayTime) as usize;
+        let attackSamples = (self.sample_rate as f32 * attackTime) as usize;
+        
         samples.par_iter_mut().enumerate().for_each(|(i,sample)|
         {
+            
             let mut s: f32 = 0.0;
             let t = i as f32 / self.sample_rate as f32;
             let mut h = 1;
+
+            //ATTACK
+            let envelope = if i < attackSamples {
+                i as f32 / attackSamples as f32 // Linear attack envelope
+            } else if i < num_samples - decaySamples {
+                1.0 // Sustain phase
+            }
+            else
+            {
+                (num_samples - i) as f32 / decaySamples as f32
+            };
+
             while h as f32 * frequency < nyquist_frequency
             {
                 if h % 2 != 0
@@ -41,7 +58,8 @@ impl Generate for Triangle
                 }
                 h+=1;
             }
-            *sample = s;
+            
+            *sample = s * envelope;
         });
         return samples;
     }
