@@ -31,4 +31,4 @@ cargo build
 - `-b [bpm]`: Specifies the bpm the midi will be played at
 - `-w [waveform]`: Specifies the waveform that will be generated. [sin,square,tri,saw]
 
-
+- `-t [transpose]`: Specifies the how many octaves to transpose the midi file by. Can be negative or positive.
