@@ -9,7 +9,7 @@ pub struct Writer
 
 impl Writer
 {
-    pub fn new() -> Writer
+    pub fn new(opt: String) -> Writer
     {
         let spec: hound::WavSpec = hound::WavSpec {
             channels: 1,
@@ -18,7 +18,7 @@ impl Writer
             sample_format: hound::SampleFormat::Int,
         };
         let channels:Vec<f32> = Vec::new();
-        let writer: hound::WavWriter<std::io::BufWriter<std::fs::File>> = hound::WavWriter::create("WAV/".to_owned()+"sine.wav", spec).unwrap();
+        let writer: hound::WavWriter<std::io::BufWriter<std::fs::File>> = hound::WavWriter::create("WAV/".to_owned()+&opt + ".wav", spec).unwrap();
         Writer { writer: writer, samples: channels }
     }
 

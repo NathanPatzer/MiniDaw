@@ -18,10 +18,17 @@ cd MiniDaw
 Build the project: Run the following command to build the MiniDaw.
 ```
 cargo build --release
-.\target\release\Audio.exe
+.\target\release\Audio.exe [ARGS]
 ```
 or for a debug version
 ```
 cargo build
-.\target\debug\Audio.exe
+.\target\debug\Audio.exe [ARGS]
 ```
+
+- `-n [file_name]`: Specifies the name of the image that will be exported. Default to `output.png`
+- `-i [input_file]`: Specifies the input MIDI file containing the musical information. Mandatory argument.
+- `-b [bpm]`: Specifies the bpm the midi will be played at
+- `-w [waveform]`: Specifies the waveform that will be generated. [sin,square,tri,saw]
+
+
