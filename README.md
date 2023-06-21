@@ -26,7 +26,7 @@ cargo build
 .\target\debug\Audio.exe [ARGS]
 ```
 
-- `-n [file_name]`: Specifies the name of the image that will be exported. Default to `output.png`
+- `-n [file_name]`: Specifies the name of the wav file that will be exported. Default to `output.wav`
 - `-i [input_file]`: Specifies the input MIDI file containing the musical information. Mandatory argument.
 - `-b [bpm]`: Specifies the bpm the midi will be played at
 - `-w [waveform]`: Specifies the waveform that will be generated. [sin,square,tri,saw]
