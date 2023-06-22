@@ -25,8 +25,8 @@ impl Generate for Saw
         let num_samples = (self.sample_rate as f32 * duration) as usize;
         let nyquist_frequency = self.sample_rate as f32 / 2.0;
         let mut samples: Vec<f32> = vec![0.0;num_samples];
-        let attackTime: f32 = 0.05;
-        let decayTime: f32 = 0.05;
+        let attackTime: f32 = 0.01;
+        let decayTime: f32 = 0.01;
         let decaySamples = (self.sample_rate as f32 * decayTime) as usize;
         let attackSamples = (self.sample_rate as f32 * attackTime) as usize;
 

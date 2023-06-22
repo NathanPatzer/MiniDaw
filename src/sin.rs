@@ -28,8 +28,8 @@ impl Generate for Sin
     fn gen(&self,frequency: f32, duration: f32) -> Vec<f32> {
         let num_samples = (self.sample_rate as f32 * duration) as usize;
         let mut samples: Vec<f32> = vec![0.0;num_samples];
-        let attackTime: f32 = 0.05;
-        let decayTime: f32 = 0.05;
+        let attackTime: f32 = 0.01;
+        let decayTime: f32 = 0.01;
         let decaySamples = (self.sample_rate as f32 * decayTime) as usize;
         let attackSamples = (self.sample_rate as f32 * attackTime) as usize;
         
