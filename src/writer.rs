@@ -1,6 +1,5 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
-use rayon::prelude::{IntoParallelRefIterator, ParallelIterator};
 pub struct Writer
 {
     writer: hound::WavWriter<std::io::BufWriter<std::fs::File>>,

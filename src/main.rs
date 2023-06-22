@@ -1,5 +1,4 @@
 #![allow(non_snake_case)]
-#![allow(unused_imports)]
 extern crate hound;
 mod sin;
 mod square;
@@ -11,14 +10,8 @@ mod DSP;
 mod ArgsChecker;
 mod waveforms;
 mod MidiParser;
-use std::f32::consts::E;
-
-use MidiParser::*;
-use num_complex::Complex;
 use writer::*;
-use DSP::*;
 use waveforms::*;
-use noise::*;
 use sawtooth::*;
 use triangle::*;
 use square::*;

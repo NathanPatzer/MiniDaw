@@ -1,6 +1,6 @@
-use std::f32::consts::E;
 
-use crate::{WaveForm, sin::Sin, triangle::{self, Triangle}, square::Square, sawtooth::Saw};
+
+use crate::{WaveForm, sin::Sin, triangle::{Triangle}, square::Square, sawtooth::Saw, noise::Noise};
 pub struct ArgsChecker
 {
     pub midi: String,
@@ -17,7 +17,7 @@ impl ArgsChecker
         let mut BPM: i32 = 140;
         let mut midi: String = "".to_string();
         let mut name = "output".to_string();
-        let mut WaveForm = WaveForm::Sin(Sin::new(2000.0));
+        let mut WaveForm = WaveForm::Sin(Sin::new(4000.0));
         let mut transpose: i16 = 0;
         for i in 0..args.len()
         {
@@ -51,6 +51,10 @@ impl ArgsChecker
                 else if args[i+1].to_string() == "sin"
                 {
                     WaveForm = WaveForm::Sin(Sin::new(4000.0));
+                }
+                else if args[i].to_string() == "noise"
+                {
+                    WaveForm = WaveForm::Noise(Noise::new(4000.0));
                 }
             }
             else if args[i] == "-t" {

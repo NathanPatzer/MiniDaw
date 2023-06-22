@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
-use std::{f32::consts::PI, env};
+use std::{f32::consts::PI};
 use rayon::prelude::{IntoParallelRefMutIterator, ParallelIterator, IndexedParallelIterator};
 
 use crate::waveforms::{Generate};

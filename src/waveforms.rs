@@ -4,13 +4,15 @@ use crate::Triangle;
 use crate::Sin;
 use crate::Saw;
 use crate::Square;
+use crate::noise::Noise;
 #[derive(Clone)]
 pub enum WaveForm
 {
     Triangle(Triangle),
     Sin(Sin),
     Saw(Saw),
-    Square(Square)
+    Square(Square),
+    Noise(Noise)
 }
 
 pub trait Generate
@@ -26,7 +28,8 @@ impl Generate for WaveForm
             WaveForm::Saw(saw) => saw.gen(frequency,duration),
             WaveForm::Sin(sin) => sin.gen(frequency,duration),
             WaveForm::Square(square) => square.gen(frequency,duration),
-            WaveForm::Triangle(tri) => tri.gen(frequency, duration)    
+            WaveForm::Triangle(tri) => tri.gen(frequency, duration),
+            WaveForm::Noise(n) => n.gen(frequency,duration)    
         }
     }
 }
