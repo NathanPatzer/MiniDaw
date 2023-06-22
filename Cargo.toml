@@ -7,6 +7,20 @@ edition = "2021"
 
 [dependencies]
 hound = "3.5.0"
+libm = "0.2.7"
 midly = "0.5.3"
+num-complex = "0.4"
 rand = "0.8.5"
 rayon = "1.7.0"
+
+[profile.release]
+opt-level = 3
+debug = false
+overflow-checks = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0
+debug = true
